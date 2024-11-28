@@ -24,7 +24,7 @@ public class AutonKunto : MonoBehaviour
     }
     void Update() {
         if (Time.time - edellinenAika > 1f) {
-            fuelLevel -= 0.5f;
+            fuelLevel -= CarController.instanssi.PalautaNopeus() / 20.0f;
             fuelTeksti.text = fuelLevel.ToString();
             FuelBar.fillAmount = fuelLevel / 100f;
             edellinenAika = Time.time;

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public static CarController instanssi;
     private float horizontalInput, verticalInput;
     private float currentSteerAngle, currentbreakForce;
     private bool isBreaking;
@@ -27,6 +28,7 @@ public class CarController : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        instanssi = this;
         //PlayerPrefs.DeleteKey("BestTimeLevel");
         //PlayerPrefs.DeleteKey("BestTimeLevel1");
         //PlayerPrefs.DeleteKey("BestTimeLevel2");
@@ -88,21 +90,24 @@ public class CarController : MonoBehaviour
         wheelTransform.position = pos;
     }
 
-private void ActiveTyremarks() {
-    // Tarkistetaan nopeus ja ohjauskulma
-    float speed = rb.velocity.magnitude * 3.6f; // Nopeus km/h
-    bool isTightTurn = Mathf.Abs(currentSteerAngle) > tightTurnAngleThreshold;
+    private void ActiveTyremarks() {
+        // Tarkistetaan nopeus ja ohjauskulma
+        float speed = rb.velocity.magnitude * 3.6f; // Nopeus km/h
+        bool isTightTurn = Mathf.Abs(currentSteerAngle) > tightTurnAngleThreshold;
 
-    // Tarkistetaan, täyttyykö vähintään yksi ehto tyylijälkien aktivoimiseksi
-    if (speed > speedThreshold || isTightTurn) {
-        foreach (TrailRenderer T in Tyremarks) {
-            T.emitting = true;
-        }
-    } else {
-        foreach (TrailRenderer T in Tyremarks) {
-            T.emitting = false;
+        // Tarkistetaan, täyttyykö vähintään yksi ehto tyylijälkien aktivoimiseksi
+        if (speed > speedThreshold || isTightTurn) {
+            foreach (TrailRenderer T in Tyremarks) {
+                T.emitting = true;
+            }
+        } else {
+            foreach (TrailRenderer T in Tyremarks) {
+                T.emitting = false;
+            }
         }
     }
-}
+    public float PalautaNopeus() {
+        return rb.velocity.magnitude * 3.6f;
+    }
 
 }

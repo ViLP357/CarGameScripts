@@ -13,6 +13,8 @@ public class ValikkoManager : MonoBehaviour
     public GameObject kuolemaPanel;
     public GameObject voittoPanel;
     public GameObject tehtavaPanel;
+    public GameObject varkikkoValikko;
+    public GameObject varikkoNappi;
     public Aika aikascripti;
     private string TimeSavePlace;
     private bool alkuAvaus;
@@ -22,6 +24,7 @@ public class ValikkoManager : MonoBehaviour
         kuolemaPanel.SetActive(false);
         voittoPanel.SetActive(false);
         tehtavaPanel.SetActive(true);
+        varkikkoValikko.SetActive(false);
         instanssi = this;
         aikascripti = Object.FindObjectOfType<Aika>();
         Time.timeScale = 0;
@@ -64,6 +67,8 @@ public class ValikkoManager : MonoBehaviour
         if (alkuAvaus == true) {
             Time.timeScale = 1;
             alkuAvaus = false;
+            varikkoNappi.SetActive(false);
+            varkikkoValikko.SetActive(false);
         }
     }
     public void AvaaVoittoValikko () {
@@ -84,5 +89,8 @@ public class ValikkoManager : MonoBehaviour
         else {
             Debug.Log("No nyt ei tallennettu");
         }
+    }
+    public void  AvaaTaiSuljeVarikko() {
+        varkikkoValikko.SetActive(!varkikkoValikko.activeInHierarchy);
     }
 }
