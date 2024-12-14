@@ -12,7 +12,6 @@ public class VihollisenOhjaus : MonoBehaviour
     bool walkPointSet;
     public float walkPointRange;
  
-
     //attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -34,14 +33,13 @@ public class VihollisenOhjaus : MonoBehaviour
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
     }
     private void Patroling() {
-        Debug.Log("Partioidaan");
-        //if (!walkPointSet) SearchWalkPoint();
+        //Debug.Log("Partioidaan");
+
         if (!walkPointSet) SearchWalkPoint();
 
-        Debug.Log(walkPointSet);
+        //Debug.Log(walkPointSet);
         
         if (walkPointSet) {
-            Debug.Log("Etsitään kohde");
             agent.SetDestination(walkPoint);
         }
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -58,24 +56,19 @@ public class VihollisenOhjaus : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) {
             walkPointSet = true;
             Debug.Log(walkPointSet);
-            Debug.Log("asetetaan walkpoint");
-            //
         }
         else {
-            Debug.Log("ei");
-            Debug.Log("Raycast maassa: " + Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround));
-            Debug.Log("Help");
-
+            //Debug.Log("Raycast maassa: " + Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround));
         }
         
     }
     private void ChasePlayer() {
-        Debug.Log("jahdataan");
+        //Debug.Log("jahdataan");
         agent.SetDestination(player.position);
 
     }
     private void AttackPlayer() {
-        Debug.Log("Voisi hyökätä");
+        //Debug.Log("Voisi hyökätä");
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 
