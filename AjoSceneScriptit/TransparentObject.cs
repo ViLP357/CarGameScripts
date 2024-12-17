@@ -5,18 +5,20 @@ using UnityEngine;
 public class TransparentObject : MonoBehaviour
 {
     public float fadeSpeed, fadeAmount;
-    float originalOpacity;
-    Renderer renderer;
-    Material Mat;
+    //float originalOpacity;
+    //Renderer renderer;
+    Material[] Mats;
     public bool DoFade = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Mat = GetComponent<Renderer>().material;
-        originalOpacity = Mat.color.a;
-    }
+    private Dictionary<Material, float> originalOpacities = new Dictionary<Material, float>();
 
-    // Update is called once per frame
+void Start()
+{
+    Mats = GetComponent<Renderer>().materials;
+    foreach (Material mat in Mats) {
+        originalOpacities[mat] = mat.color.a;
+    }
+}
+
     void Update()
     {
         if (DoFade) {
@@ -27,13 +29,23 @@ public class TransparentObject : MonoBehaviour
         }
     }
     void FadeNow() {
-        Color currentColor = Mat.color;
-        Color smoothColor = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(currentColor.a, fadeAmount, fadeSpeed * Time.deltaTime));
-        Mat.color = smoothColor;
+    foreach (Material mat in Mats) {
+        float originalAlpha = originalOpacities[mat]; // Haetaan materiaalin alkuperäinen alfa-arvo
+        Color currentColor = mat.color;
+        Color smoothColor = new Color(currentColor.r, currentColor.g, currentColor.b, 
+            Mathf.Lerp(currentColor.a, fadeAmount, fadeSpeed * Time.deltaTime)); // Fade-arvoa lähestytään
+        mat.color = smoothColor;
     }
-    void ResetFade() {
-        Color currentColor = Mat.color;
-        Color smoothColor = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(currentColor.a, originalOpacity, fadeSpeed * Time.deltaTime));
-        Mat.color = smoothColor;
+}
+
+void ResetFade() {
+    foreach (Material mat in Mats) {
+        float originalAlpha = originalOpacities[mat];
+        Color currentColor = mat.color;
+        Color smoothColor = new Color(currentColor.r, currentColor.g, currentColor.b,
+            Mathf.Lerp(currentColor.a, originalAlpha, fadeSpeed * Time.deltaTime));
+        mat.color = smoothColor;
     }
+}
+
 }

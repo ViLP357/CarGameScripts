@@ -36,7 +36,7 @@ public class CarsTriggers : MonoBehaviour
             if (Time.time - viimepaketti > 0.5f) {
                 Pisteet.instanssi.PakettiHaettu(1);
                 viimepaketti = Time.time;
-                Debug.Log("pakettipaikka");
+                //Debug.Log("pakettipaikka");
             }
         }
     }
@@ -51,7 +51,7 @@ public class CarsTriggers : MonoBehaviour
             if (Time.time - lastCrash > 0.5f) {  
                 Debug.Log(voima);
                 if (voima > 4) {
-                    Debug.Log("Luja törmäys");
+                    //Debug.Log("Luja törmäys");
                     AutonKunto.instanssi.crashHit(Mathf.Round(voima) * 10);
                 }
                 lastCrash = Time.time;
