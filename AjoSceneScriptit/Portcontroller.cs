@@ -24,15 +24,16 @@ public class Portcontroller : MonoBehaviour
     private void placePorts() {
         for (int i = 0; i < porttienPaikat.Length; i++) {
             Transform kohta = porttienPaikat[i];
-
-            Instantiate(portti, kohta.position, portti.transform.rotation);
+            //Instantiate(portti, kohta.position, portti.transform.rotation);
+            Instantiate(portti, kohta.position, kohta.rotation);
         }
     }
     private void placeStopPlaces() {
         for (int i = 0; i < pakettienPaikat.Length; i++) {
             Transform kohta = pakettienPaikat[i];
             Instantiate(stopPlace, kohta.position, stopPlace.transform.rotation);
-        }
+            //Instantiate(stopPlace, kohta.position, kohta.rotation);
+        }   
     }
 
     public int porttienMaara () {

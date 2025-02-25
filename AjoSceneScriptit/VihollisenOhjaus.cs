@@ -20,21 +20,37 @@ public class VihollisenOhjaus : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    Animator animaattori;
     private void Awake() {
         player = GameObject.Find("CarPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
+        animaattori = GetComponentInChildren<Animator>();
+        animaattori.SetBool("seisoo", true);
     }
 
     private void Update() {
+        bool previousSight = playerInSightRange;
+        bool previousAttack = playerInAttackRange;
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        if (previousSight != playerInSightRange || previousAttack != playerInAttackRange) {
+            Debug.Log($"Havainto muuttui: Näkyvissä: {playerInSightRange}, Hyökkäysetäisyydellä: {playerInAttackRange}");
+    }
+
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
+       
     }
     private void Patroling() {
-        //Debug.Log("Partioidaan");
+        Debug.Log("Partioidaan");
+        //animator.CrossFade("Walk", 0.2f); // Siirtyminen "Walk"-animaatioon 0.2 sekunnissa
 
+        animaattori.SetBool("seisoo", true);
+        animaattori.SetBool("kavelee", false);
+        animaattori.SetBool("tahtaa", false);
         if (!walkPointSet) SearchWalkPoint();
 
         //Debug.Log(walkPointSet);
@@ -49,6 +65,7 @@ public class VihollisenOhjaus : MonoBehaviour
         }
     }
     private void SearchWalkPoint() {
+        Debug.Log("etsitaan");
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
@@ -59,17 +76,29 @@ public class VihollisenOhjaus : MonoBehaviour
         }
         else {
             //Debug.Log("Raycast maassa: " + Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround));
+            randomZ = Random.Range(-walkPointRange, walkPointRange);
+            randomX = Random.Range(-walkPointRange, walkPointRange);
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
         }
-        
     }
     private void ChasePlayer() {
-        //Debug.Log("jahdataan");
+        Debug.Log("jahdataan");
+        agent.isStopped = false;
         agent.SetDestination(player.position);
+        animaattori.SetBool("tahtaa", false);
+        animaattori.SetBool("kavelee", true);
+
+        
 
     }
     private void AttackPlayer() {
-        //Debug.Log("Voisi hyökätä");
-        agent.SetDestination(transform.position);
+        Debug.Log("Voisi hyökätä");
+        animaattori.SetBool("seisoo", false);
+        animaattori.SetBool("kavelee", false);
+        animaattori.SetBool("tahtaa", true);
+        //agent.SetDestination(transform.position);
+        agent.isStopped = true;
         transform.LookAt(player);
 
         if (!alreadyAttacked) {
