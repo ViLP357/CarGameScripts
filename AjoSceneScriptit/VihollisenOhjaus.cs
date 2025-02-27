@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,7 +10,6 @@ public class VihollisenOhjaus : MonoBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
- 
     //attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -21,6 +19,9 @@ public class VihollisenOhjaus : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     Animator animaattori;
+    //Ase
+
+    
     private void Awake() {
         player = GameObject.Find("CarPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -45,7 +46,7 @@ public class VihollisenOhjaus : MonoBehaviour
        
     }
     private void Patroling() {
-        Debug.Log("Partioidaan");
+        //Debug.Log("Partioidaan");
         //animator.CrossFade("Walk", 0.2f); // Siirtyminen "Walk"-animaatioon 0.2 sekunnissa
 
         animaattori.SetBool("seisoo", true);
@@ -65,7 +66,7 @@ public class VihollisenOhjaus : MonoBehaviour
         }
     }
     private void SearchWalkPoint() {
-        Debug.Log("etsitaan");
+        //Debug.Log("etsitaan");
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
@@ -83,7 +84,7 @@ public class VihollisenOhjaus : MonoBehaviour
         }
     }
     private void ChasePlayer() {
-        Debug.Log("jahdataan");
+        //Debug.Log("jahdataan");
         agent.isStopped = false;
         agent.SetDestination(player.position);
         animaattori.SetBool("tahtaa", false);
@@ -92,22 +93,20 @@ public class VihollisenOhjaus : MonoBehaviour
         
 
     }
-    private void AttackPlayer() {
-        Debug.Log("Voisi hyökätä");
-        animaattori.SetBool("seisoo", false);
-        animaattori.SetBool("kavelee", false);
-        animaattori.SetBool("tahtaa", true);
-        //agent.SetDestination(transform.position);
-        agent.isStopped = true;
-        transform.LookAt(player);
+private void AttackPlayer() {
+    //Debug.Log("Hyökkäys käynnissä...");
+    animaattori.SetBool("seisoo", false);
+    animaattori.SetBool("kavelee", false);
+    animaattori.SetBool("tahtaa", true);
+    agent.isStopped = true;
+    transform.LookAt(player);
 
-        if (!alreadyAttacked) {
-            //hyökkäysfunctioita tännä
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-    private void ResetAttack() {
-        alreadyAttacked = false;
-    }
+
+
+
+}
+
+    //private void ResetAttack() {
+    //    alreadyAttacked = false;
+    //}
 }

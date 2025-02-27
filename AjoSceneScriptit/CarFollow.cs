@@ -57,8 +57,8 @@ public class CarFollow : MonoBehaviour
     
                 }
                 else {
-                    Debug.Log("ei osu4");
-                    Debug.Log($"Raycast hit object: {hit.collider.gameObject.name}");
+                    //Debug.Log("ei osu4");
+                    //Debug.Log($"Raycast hit object: {hit.collider.gameObject.name}");
 
                     //
                 }
