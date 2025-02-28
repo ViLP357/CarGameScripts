@@ -10,9 +10,12 @@ public class CarsTriggers : MonoBehaviour
     private float lastHeal;
     private float voima;
     private Portcontroller portscript;
+    private VihollisenOhjaus vihollisenOhjaus;
+
 
     private void Start() {
         portscript = GameObject.FindObjectOfType<Portcontroller>();
+        
     }
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other) {
@@ -39,6 +42,8 @@ public class CarsTriggers : MonoBehaviour
                 //Debug.Log("pakettipaikka");
             }
         }
+
+
     }
     private void OnTriggerExit(Collider other) {
         if (other.transform.tag == "pakettipaikka") {
@@ -57,6 +62,23 @@ public class CarsTriggers : MonoBehaviour
                 lastCrash = Time.time;
             }            
         }
+        else if (collision.transform.tag == "robo") {
+            Debug.Log("auto osuu");
+            voima = collision.relativeVelocity.magnitude;
+            if (Time.time - lastCrash > 0.5f) {
+                if (voima > 3) {
+                        VihollisenOhjaus[] viholliset = GameObject.FindObjectsOfType<VihollisenOhjaus>();
+                        Debug.Log("Robo kuolee");
+                        foreach (VihollisenOhjaus vihollinen in viholliset) {
+                            if (vihollinen.gameObject == collision.gameObject) {
+                                vihollinen.Kuole();
+                            }
+                        }
+                        
+                    }
+            }
+        }
+
     }
     private void OnTriggerStay (Collider other) {
         if (other.transform.tag == "healstation") {

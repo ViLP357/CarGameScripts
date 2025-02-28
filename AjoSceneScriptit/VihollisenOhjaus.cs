@@ -13,13 +13,14 @@ public class VihollisenOhjaus : MonoBehaviour
     //attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
+    [SerializeField] private bool kuollut;
 
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
     Animator animaattori;
-    //Ase
+    public VihollisenOhjaus instanssi;
 
     
     private void Awake() {
@@ -27,23 +28,26 @@ public class VihollisenOhjaus : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animaattori = GetComponentInChildren<Animator>();
         animaattori.SetBool("seisoo", true);
+        instanssi = this;
     }
 
     private void Update() {
-        bool previousSight = playerInSightRange;
-        bool previousAttack = playerInAttackRange;
+        if (!kuollut) {
+            bool previousSight = playerInSightRange;
+            bool previousAttack = playerInAttackRange;
 
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (previousSight != playerInSightRange || previousAttack != playerInAttackRange) {
-            Debug.Log($"Havainto muuttui: Näkyvissä: {playerInSightRange}, Hyökkäysetäisyydellä: {playerInAttackRange}");
-    }
+            if (previousSight != playerInSightRange || previousAttack != playerInAttackRange) {
+                Debug.Log($"Havainto muuttui: Näkyvissä: {playerInSightRange}, Hyökkäysetäisyydellä: {playerInAttackRange}");
+        }
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
-       
+            if (!playerInSightRange && !playerInAttackRange) Patroling();
+            if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+            if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        
+        }
     }
     private void Patroling() {
         //Debug.Log("Partioidaan");
@@ -93,19 +97,29 @@ public class VihollisenOhjaus : MonoBehaviour
         
 
     }
-private void AttackPlayer() {
-    //Debug.Log("Hyökkäys käynnissä...");
-    animaattori.SetBool("seisoo", false);
-    animaattori.SetBool("kavelee", false);
-    animaattori.SetBool("tahtaa", true);
-    agent.isStopped = true;
-    transform.LookAt(player);
-
-
-
-
-}
-
+    private void AttackPlayer() {
+        //Debug.Log("Hyökkäys käynnissä...");
+        animaattori.SetBool("seisoo", false);
+        animaattori.SetBool("kavelee", false);
+        animaattori.SetBool("tahtaa", true);
+        agent.isStopped = true;
+        transform.LookAt(player);
+    }
+    public void Kuole() {
+        animaattori.SetBool("kuolee", true);
+        agent.isStopped = true;
+        //agent.velocity = Vector3.zero;
+        //agent.ResetPath();
+        //agent.SetDestination(transform.position);
+        kuollut = true;
+    }
+    public bool onkoKuollut() {
+        if (kuollut) {
+        return true;
+        } else {
+            return false;
+        }
+    }
     //private void ResetAttack() {
     //    alreadyAttacked = false;
     //}

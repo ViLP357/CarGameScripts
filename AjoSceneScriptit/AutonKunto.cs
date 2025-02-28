@@ -32,7 +32,6 @@ public class AutonKunto : MonoBehaviour
                 ValikkoManager.instanssi.AvaaKuolemaValikko();
             }
         }
-
     }
     public void crashHit (float hit) {
         if (conditionLevel - hit > 0f) {
@@ -62,4 +61,6 @@ public class AutonKunto : MonoBehaviour
     public float FuelNow() {
         return fuelLevel;
     }
+
+    
 }
