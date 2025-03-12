@@ -7,6 +7,7 @@ public class Ennatysajat : MonoBehaviour
 {
     public TMP_Text EnnatysaikaLevel1;
     public TMP_Text EnnatysaikaLevel2;
+    public TMP_Text EnnatysaikaLevel3;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class Ennatysajat : MonoBehaviour
             EnnatysaikaLevel1.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel1"));
         }
         else {
-            Debug.Log("ei aikaa");
+            Debug.Log("ei aikaa 1");
             EnnatysaikaLevel1.text = "--:--";
         }
         if (PlayerPrefs.HasKey("BestTimeLevel2")){
@@ -23,8 +24,16 @@ public class Ennatysajat : MonoBehaviour
             EnnatysaikaLevel2.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel2"));
         }
         else {
-            Debug.Log("ei aikaa");
+            Debug.Log("ei aikaa 2");
             EnnatysaikaLevel2.text = "--:--";
+        }
+        if (PlayerPrefs.HasKey("BestTimeLevel2")){
+            Debug.Log("Aika löytynyt");
+            EnnatysaikaLevel3.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel3"));
+        }
+        else {
+            Debug.Log("ei aikaa 3");
+            EnnatysaikaLevel3.text = "--:--";
         }
     }
     private string muunnaTekstiksi(int aika) {
@@ -37,8 +46,8 @@ public class Ennatysajat : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void Update()
+    //{
+    //    
+    //}
 }

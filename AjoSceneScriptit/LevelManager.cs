@@ -7,11 +7,13 @@ public class LevelManager : MonoBehaviour
     public int currentLevel;
     private Level1Manager level1script;
     private Level2Manager level2script;
+    private Level3Manager level3script;
     // Start is called before the first frame update
     void Start()
     {
-    level1script = GameObject.FindObjectOfType<Level1Manager>();
-    level2script = GameObject.FindObjectOfType<Level2Manager>();
+    level1script = FindObjectOfType<Level1Manager>();
+    level2script = FindObjectOfType<Level2Manager>();
+    level3script = FindObjectOfType<Level3Manager>();
 
     if (PlayerPrefs.HasKey("currentLevel")){
         currentLevel = PlayerPrefs.GetInt("currentLevel");
@@ -20,8 +22,11 @@ public class LevelManager : MonoBehaviour
         if (currentLevel == 1) {
             level1script.presettings();
         }
-        if (currentLevel == 2) {
+        else if (currentLevel == 2) {
             level2script.presettings();
+        }
+        else if (currentLevel == 3) {
+            level3script.presettings();
         }
     }
     else {

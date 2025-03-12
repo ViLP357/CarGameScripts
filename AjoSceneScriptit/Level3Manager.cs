@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level1Manager : MonoBehaviour
+public class Level3Manager : MonoBehaviour
 {
     public GameObject car;
     public GameObject levelinPortit;
     public Transform lahtopaikka;
     public GameObject levelinTehtavaTeksti;
-
-    // Start is called before the first frame update
-
     private void placeCar() {
         car.transform.position = lahtopaikka.position;
-        //Instantiate(car, lahtopaikka.position, lahtopaikka.rotation);
     }
     public void presettings() {
-        Debug.Log("Presettings toimii");
+        Debug.Log("Level 3 käynnissä");
         placeCar();
         levelinPortit.SetActive(true);
         levelinTehtavaTeksti.SetActive(true);

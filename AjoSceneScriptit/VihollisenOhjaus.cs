@@ -39,9 +39,9 @@ public class VihollisenOhjaus : MonoBehaviour
             playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-            if (previousSight != playerInSightRange || previousAttack != playerInAttackRange) {
-                Debug.Log($"Havainto muuttui: Näkyvissä: {playerInSightRange}, Hyökkäysetäisyydellä: {playerInAttackRange}");
-        }
+            //if (previousSight != playerInSightRange || previousAttack != playerInAttackRange) {
+                //Debug.Log($"Havainto muuttui: Näkyvissä: {playerInSightRange}, Hyökkäysetäisyydellä: {playerInAttackRange}");
+        //}
 
             if (!playerInSightRange && !playerInAttackRange) Patroling();
             if (playerInSightRange && !playerInAttackRange) ChasePlayer();
@@ -77,7 +77,7 @@ public class VihollisenOhjaus : MonoBehaviour
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) {
             walkPointSet = true;
-            Debug.Log(walkPointSet);
+            //Debug.Log(walkPointSet);
         }
         else {
             //Debug.Log("Raycast maassa: " + Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround));
@@ -93,9 +93,6 @@ public class VihollisenOhjaus : MonoBehaviour
         agent.SetDestination(player.position);
         animaattori.SetBool("tahtaa", false);
         animaattori.SetBool("kavelee", true);
-
-        
-
     }
     private void AttackPlayer() {
         //Debug.Log("Hyökkäys käynnissä...");

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 
 public class ValikkoManager : MonoBehaviour
@@ -26,7 +27,7 @@ public class ValikkoManager : MonoBehaviour
         tehtavaPanel.SetActive(true);
         varkikkoValikko.SetActive(false);
         instanssi = this;
-        aikascripti = Object.FindObjectOfType<Aika>();
+        aikascripti = FindObjectOfType<Aika>();
         Time.timeScale = 0;
         alkuAvaus = true;
     }
@@ -85,7 +86,8 @@ public class ValikkoManager : MonoBehaviour
         Debug.Log(TimeSavePlace);
 
 
-        if (PlayerPrefs.GetFloat(TimeSavePlace) > aikascripti.KulunutAikaFloat()) {
+        if (PlayerPrefs.GetFloat(TimeSavePlace) > aikascripti.KulunutAikaFloat() || !PlayerPrefs.HasKey(TimeSavePlace)) {
+            Debug.Log("loytyiko: "+ PlayerPrefs.HasKey(TimeSavePlace));
             PlayerPrefs.SetFloat(TimeSavePlace, aikascripti.KulunutAikaFloat());
             Debug.Log("Aika tallennettu");
             Debug.Log(" " + TimeSavePlace +  aikascripti.KulunutAikaFloat());

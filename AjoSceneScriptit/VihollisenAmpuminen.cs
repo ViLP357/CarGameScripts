@@ -66,7 +66,7 @@ public class RobotinAmpuminen : MonoBehaviour
             //Debug.Log("osuu");
             Debug.DrawRay(säde.origin, säde.direction * osuma.distance, Color.red, 1.0f);
             if (osuma.transform.CompareTag("Player")) {
-                Debug.Log("osiu pelaajaan");
+                //Debug.Log("osiu pelaajaan");
                 autoscripti.crashHit(1f);
             }
         }

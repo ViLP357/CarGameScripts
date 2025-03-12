@@ -7,6 +7,7 @@ public class Level2Manager : MonoBehaviour
     public GameObject car;
     public GameObject levelinPortit;
     public Transform lahtopaikka;
+    public GameObject levelinTehtavaTeksti;
     private void placeCar() {
         car.transform.position = lahtopaikka.position;
     }
@@ -14,5 +15,6 @@ public class Level2Manager : MonoBehaviour
         Debug.Log("Level 2 käynnissä");
         placeCar();
         levelinPortit.SetActive(true);
+        levelinTehtavaTeksti.SetActive(true);
     }
 }
