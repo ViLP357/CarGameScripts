@@ -13,6 +13,7 @@ public class Level1Manager : MonoBehaviour
 
     private void placeCar() {
         car.transform.position = lahtopaikka.position;
+        car.transform.rotation = lahtopaikka.rotation;
         //Instantiate(car, lahtopaikka.position, lahtopaikka.rotation);
     }
     public void presettings() {

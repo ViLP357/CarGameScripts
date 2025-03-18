@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class Portcontroller : MonoBehaviour
 {
@@ -10,6 +13,8 @@ public class Portcontroller : MonoBehaviour
     public Transform[] pakettienPaikat;
     public GameObject portti;
     public GameObject stopPlace;
+
+    public List<GameObject> porttiObjektit = new List<GameObject>();
     void Start() {
         instanssi = this;
         placePorts();
@@ -25,15 +30,28 @@ public class Portcontroller : MonoBehaviour
         for (int i = 0; i < porttienPaikat.Length; i++) {
             Transform kohta = porttienPaikat[i];
             //Instantiate(portti, kohta.position, portti.transform.rotation);
-            Instantiate(portti, kohta.position, kohta.rotation);
+
+            
+            GameObject uusiPortti = Instantiate(portti, kohta.position, kohta.rotation);
+            TextMeshPro textmesh = uusiPortti.GetComponentInChildren<TextMeshPro>();
+            textmesh.text = (i + 1).ToString();
+            if (i != 0) {
+                uusiPortti.SetActive(false);
+            }
+            porttiObjektit.Add(uusiPortti);
         }
     }
     private void placeStopPlaces() {
         for (int i = 0; i < pakettienPaikat.Length; i++) {
             Transform kohta = pakettienPaikat[i];
-            Instantiate(stopPlace, kohta.position, stopPlace.transform.rotation);
+            Instantiate(stopPlace, kohta.position, kohta.rotation);
             //Instantiate(stopPlace, kohta.position, kohta.rotation);
         }   
+    }
+    public void NaytaSeuraava(int numero) {
+        if (numero < porttienPaikat.Length) {
+            porttiObjektit[numero].SetActive(true);
+        }
     }
 
     public int porttienMaara () {

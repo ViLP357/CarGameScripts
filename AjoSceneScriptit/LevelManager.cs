@@ -37,10 +37,10 @@ public class LevelManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void Update()
+    //{
+    //    
+    //}
     public int returnCurrentLevel(int level) {
         return currentLevel;
     }

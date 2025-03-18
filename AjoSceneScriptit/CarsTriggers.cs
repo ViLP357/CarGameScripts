@@ -12,9 +12,10 @@ public class CarsTriggers : MonoBehaviour
     private Portcontroller portscript;
     private VihollisenOhjaus vihollisenOhjaus;
 
-
+    int portti = 0;
     private void Start() {
-        portscript = GameObject.FindObjectOfType<Portcontroller>();
+        portscript = FindObjectOfType<Portcontroller>();
+        //portscript.NaytaSeuraava(portti);
         
     }
     // Start is called before the first frame update
@@ -24,11 +25,13 @@ public class CarsTriggers : MonoBehaviour
                 //Debug.Log("Trigger");
                 Pisteet.instanssi.Lisää(1);
                 viimePortti = Time.time;
-
+                portti += 1;
+                Portcontroller.instanssi.NaytaSeuraava(portti);
                 Portcontroller.instanssi.Tuhoa(other);
             }
         }
         else if (other.transform.tag == "maali") {
+            //voidaan vaihtaa ehkä vain pakettien maara == oikea
             if (Pisteet.instanssi.PisteidenMaara() == portscript.porttienMaara() && Pisteet.instanssi.PakettienMaara() == portscript.pakettienMaara()) {
                 //Portcontroller.instanssi.Voitto();
                 portscript.Voitto();

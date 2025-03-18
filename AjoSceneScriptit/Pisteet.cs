@@ -24,7 +24,7 @@ public class Pisteet : MonoBehaviour
 
     }
     void LateUpdate() {
-        portscript = GameObject.FindObjectOfType<Portcontroller>();
+        portscript = FindObjectOfType<Portcontroller>();
         pakettiteksti.text = "Paketit: " + haetutPaketit.ToString() + "/" + portscript.pakettienMaara();
         teksti.text = "Portit: " + pisteet.ToString() + "/" +  portscript.porttienMaara();
     }
