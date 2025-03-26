@@ -5,6 +5,7 @@ using UnityEngine;
 public class Level3Manager : MonoBehaviour
 {
     public GameObject car;
+    public GameObject valot;
     public GameObject levelinPortit;
     public Transform lahtopaikka;
     public GameObject levelinTehtavaTeksti;
@@ -17,5 +18,6 @@ public class Level3Manager : MonoBehaviour
         placeCar();
         levelinPortit.SetActive(true);
         levelinTehtavaTeksti.SetActive(true);
+        valot.SetActive(true);
     }
 }

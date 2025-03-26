@@ -32,7 +32,8 @@ public class CarsTriggers : MonoBehaviour
         }
         else if (other.transform.tag == "maali") {
             //voidaan vaihtaa ehkä vain pakettien maara == oikea
-            if (Pisteet.instanssi.PisteidenMaara() == portscript.porttienMaara() && Pisteet.instanssi.PakettienMaara() == portscript.pakettienMaara()) {
+            if (Pisteet.instanssi.PakettienMaara() == portscript.pakettienMaara()) {
+            //if (Pisteet.instanssi.PisteidenMaara() == portscript.porttienMaara() && Pisteet.instanssi.PakettienMaara() == portscript.pakettienMaara()) {
                 //Portcontroller.instanssi.Voitto();
                 portscript.Voitto();
                 ValikkoManager.instanssi.AvaaVoittoValikko();
@@ -60,7 +61,7 @@ public class CarsTriggers : MonoBehaviour
                 Debug.Log(voima);
                 if (voima > 4) {
                     //Debug.Log("Luja törmäys");
-                    AutonKunto.instanssi.crashHit(Mathf.Round(voima) * 10);
+                    AutonKunto.instanssi.crashHit(Mathf.Round(voima) * 4);
                 }
                 lastCrash = Time.time;
             }            
