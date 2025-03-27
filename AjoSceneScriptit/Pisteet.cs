@@ -7,17 +7,19 @@ public class Pisteet : MonoBehaviour
 
 {
     public static Pisteet instanssi;
-    public TMP_Text teksti;
-    public TMP_Text pakettiteksti;
+    //public TMP_Text teksti;
+    //public TMP_Text pakettiteksti;
     int pisteet;
     int haetutPaketit;
     private Portcontroller portscript;
+    public Image pakettiMato;
 
     // Start is called before the first frame update
     void Start()
     {
 
         instanssi = this;
+        pakettiMato.fillAmount = 0;
 
         //pakettiteksti.text = haetutPaketit.ToString();
         //teksti.text = pisteet.ToString();
@@ -25,8 +27,8 @@ public class Pisteet : MonoBehaviour
     }
     void LateUpdate() {
         portscript = FindObjectOfType<Portcontroller>();
-        pakettiteksti.text = "Paketit: " + haetutPaketit.ToString() + "/" + portscript.pakettienMaara();
-        teksti.text = "Portit: " + pisteet.ToString() + "/" +  portscript.porttienMaara();
+        //pakettiteksti.text = "Paketit: " + haetutPaketit.ToString() + "/" + portscript.pakettienMaara();
+        //teksti.text = "Portit: " + pisteet.ToString() + "/" +  portscript.porttienMaara();
     }
 
     public void Lisää(int maara) {
@@ -35,6 +37,10 @@ public class Pisteet : MonoBehaviour
     }
     public void PakettiHaettu(int maara) {
         haetutPaketit += maara;
+        pakettiMato.fillAmount = (float)haetutPaketit / portscript.pakettienMaara();
+        Debug.Log(portscript.pakettienMaara());
+        Debug.Log(haetutPaketit);
+        Debug.Log(haetutPaketit / portscript.pakettienMaara());
         //pakettiteksti.text = "Paketit: " + haetutPaketit.ToString() + "/" + portscript.pakettienMaara();
     }
     public int PisteidenMaara() {

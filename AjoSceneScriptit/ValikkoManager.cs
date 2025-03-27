@@ -16,7 +16,9 @@ public class ValikkoManager : MonoBehaviour
     public GameObject tehtavaPanel;
     public GameObject varkikkoValikko;
     public GameObject varikkoNappi;
+    public GameObject radionakyma;
     public Aika aikascripti;
+
     private string TimeSavePlace;
     private bool alkuAvaus;
     //public TMP_Text aikateksti;
@@ -26,6 +28,7 @@ public class ValikkoManager : MonoBehaviour
         voittoPanel.SetActive(false);
         tehtavaPanel.SetActive(true);
         varkikkoValikko.SetActive(false);
+        radionakyma.SetActive(false);
         instanssi = this;
         aikascripti = FindObjectOfType<Aika>();
         Time.timeScale = 0;
@@ -98,5 +101,8 @@ public class ValikkoManager : MonoBehaviour
     }
     public void  AvaaTaiSuljeVarikko() {
         varkikkoValikko.SetActive(!varkikkoValikko.activeInHierarchy);
+    }
+    public void AvaaTaiSuljeRadionakyma() {
+        radionakyma.SetActive(!radionakyma.activeInHierarchy);
     }
 }

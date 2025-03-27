@@ -12,7 +12,7 @@ public class Ennatysajat : MonoBehaviour
     void Start()
     {
         if (PlayerPrefs.HasKey("BestTimeLevel1")){
-            Debug.Log("Aika löytynyt");
+            //Debug.Log("Aika löytynyt");
             EnnatysaikaLevel1.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel1"));
         }
         else {
@@ -20,15 +20,15 @@ public class Ennatysajat : MonoBehaviour
             EnnatysaikaLevel1.text = "--:--";
         }
         if (PlayerPrefs.HasKey("BestTimeLevel2")){
-            Debug.Log("Aika löytynyt");
+            //Debug.Log("Aika löytynyt");
             EnnatysaikaLevel2.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel2"));
         }
         else {
-            Debug.Log("ei aikaa 2");
+            //Debug.Log("ei aikaa 2");
             EnnatysaikaLevel2.text = "--:--";
         }
-        if (PlayerPrefs.HasKey("BestTimeLevel2")){
-            Debug.Log("Aika löytynyt");
+        if (PlayerPrefs.HasKey("BestTimeLevel3")){
+            //Debug.Log("Aika löytynyt");
             EnnatysaikaLevel3.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel3"));
         }
         else {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class LevelManager : MonoBehaviour
     private Level1Manager level1script;
     private Level2Manager level2script;
     private Level3Manager level3script;
+    public GameObject Reunat3;
+    public GameObject Reunat1;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +24,19 @@ public class LevelManager : MonoBehaviour
         
         if (currentLevel == 1) {
             level1script.presettings();
+            Reunat1.SetActive(true);
+            Reunat3.SetActive(false);
+
         }
         else if (currentLevel == 2) {
             level2script.presettings();
+            Reunat1.SetActive(false);
+            Reunat3.SetActive(true);
         }
         else if (currentLevel == 3) {
             level3script.presettings();
+            Reunat1.SetActive(false);
+            Reunat3.SetActive(true);
         }
     }
     else {
