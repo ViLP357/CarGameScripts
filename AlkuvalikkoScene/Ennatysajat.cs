@@ -8,12 +8,19 @@ public class Ennatysajat : MonoBehaviour
     public TMP_Text EnnatysaikaLevel1;
     public TMP_Text EnnatysaikaLevel2;
     public TMP_Text EnnatysaikaLevel3;
+    [SerializeField] public float Yhteisaika;
+
+    public TMP_Text textYhteisaika;
+    public static Ennatysajat instanssi;
+
     // Start is called before the first frame update
     void Start()
     {
+
         if (PlayerPrefs.HasKey("BestTimeLevel1")){
             //Debug.Log("Aika löytynyt");
             EnnatysaikaLevel1.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel1"));
+            Yhteisaika += PlayerPrefs.GetFloat("BestTimeLevel1");
         }
         else {
             Debug.Log("ei aikaa 1");
@@ -22,6 +29,7 @@ public class Ennatysajat : MonoBehaviour
         if (PlayerPrefs.HasKey("BestTimeLevel2")){
             //Debug.Log("Aika löytynyt");
             EnnatysaikaLevel2.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel2"));
+            Yhteisaika += PlayerPrefs.GetFloat("BestTimeLevel2");
         }
         else {
             //Debug.Log("ei aikaa 2");
@@ -30,11 +38,14 @@ public class Ennatysajat : MonoBehaviour
         if (PlayerPrefs.HasKey("BestTimeLevel3")){
             //Debug.Log("Aika löytynyt");
             EnnatysaikaLevel3.text = muunnaTekstiksi((int)PlayerPrefs.GetFloat("BestTimeLevel3"));
+            Yhteisaika += PlayerPrefs.GetFloat("BestTimeLevel3");
         }
         else {
             Debug.Log("ei aikaa 3");
             EnnatysaikaLevel3.text = "--:--";
         }
+        //textYhteisaika.text = Yhteisaika.ToString() + " " + muunnaTekstiksi((int)Yhteisaika);
+        textYhteisaika.text = muunnaTekstiksi((int)Yhteisaika);
     }
     private string muunnaTekstiksi(int aika) {
         int tunnit = aika / 3600;
