@@ -13,6 +13,9 @@ public class Alkuvalikko : MonoBehaviour
     {
         tasoValikko.SetActive(false);
         leaderboard.SetActive(false);
+        //PlayerPrefs.DeleteKey("BestTimeLevel1");
+        //PlayerPrefs.DeleteKey("BestTimeLevel2");
+        //PlayerPrefs.DeleteKey("BestTimeLevel3");
         //levelscript = GameObject.FindObjectOfType<LevelManager>();
         //if (levelscript == null)
         //{

@@ -46,6 +46,7 @@ public class ValikkoManager : MonoBehaviour
     public void Pysaytys() {
         PysaytysPanel.SetActive(!PysaytysPanel.activeInHierarchy);
         Time.timeScale = PysaytysPanel.activeInHierarchy ? 0 : 1;
+        tehtavaPanel.SetActive(false);
     }
     public void Jatka() {
         PysaytysPanel.SetActive(false);

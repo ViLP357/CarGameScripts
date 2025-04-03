@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class AutonKunto : MonoBehaviour
 {
     public static AutonKunto instanssi;
-    public TMP_Text conditionTeksti;
+    //public TMP_Text conditionTeksti;
 
-    public TMP_Text fuelTeksti;
+    //public TMP_Text fuelTeksti;
     public Image HealthBar;
     public float conditionLevel;
 
@@ -19,16 +19,16 @@ public class AutonKunto : MonoBehaviour
 
     void Start() {
         instanssi = this;
-        conditionTeksti.text = conditionLevel.ToString();
-        fuelTeksti.text = fuelLevel.ToString();
+        //conditionTeksti.text = conditionLevel.ToString();
+        //fuelTeksti.text = fuelLevel.ToString();
     }
     void Update() {
         if (Time.time - edellinenAika > 1f) {
             fuelLevel -= CarController.instanssi.PalautaNopeus() / 20.0f;
-            fuelTeksti.text = fuelLevel.ToString();
+            //fuelTeksti.text = fuelLevel.ToString();
             FuelBar.fillAmount = fuelLevel / 100f;
             edellinenAika = Time.time;
-            if (fuelLevel == 0) {
+            if (fuelLevel < 0) {
                 ValikkoManager.instanssi.AvaaKuolemaValikko();
             }
         }
@@ -42,7 +42,7 @@ public class AutonKunto : MonoBehaviour
             conditionLevel = 0;
             ValikkoManager.instanssi.AvaaKuolemaValikko();
         }
-        conditionTeksti.text = conditionLevel.ToString();
+        //conditionTeksti.text = conditionLevel.ToString();
         HealthBar.fillAmount = conditionLevel / 100f;
     }
     public void healing (float heal) {
@@ -50,7 +50,7 @@ public class AutonKunto : MonoBehaviour
             fuelLevel += heal;
             //conditionTeksti.text = conditionLevel.ToString();
             //HealthBar.fillAmount = conditionLevel / 100f;
-            fuelTeksti.text = fuelLevel.ToString();
+            //fuelTeksti.text = fuelLevel.ToString();
             FuelBar.fillAmount = fuelLevel / 100f;
         }
     }

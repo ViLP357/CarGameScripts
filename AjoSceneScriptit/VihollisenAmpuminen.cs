@@ -16,9 +16,10 @@ public class RobotinAmpuminen : MonoBehaviour
     public Transform player;
     public bool playerInAttackRange;
     private AutonKunto autoscripti;
-    //AudioSource ääni;
-    //public AudioClip[] Ampumisäänet;
-    //private Napinpainallus nappi;
+
+    AudioSource ääni;
+    public AudioClip laserÄäni;
+
     private VihollisenOhjaus vihollisenOhjaus;
     void Start() {
         vihollisenOhjaus = GetComponent<VihollisenOhjaus>();
@@ -26,11 +27,16 @@ public class RobotinAmpuminen : MonoBehaviour
         autoscripti = GameObject.FindObjectOfType<AutonKunto>();
         if (autoscripti == null) {
         Debug.LogError("AutonKunto-komponenttia ei löytynyt!");
-        } else {
-            Debug.Log("AutonKunto löydetty!");
-        }
+        } 
+        //else {
+            //Debug.Log("AutonKunto löydetty!");
+        //}
         //ääni = GetComponent<AudioSource>();
         //nappi = GameObject.FindObjectOfType<Napinpainallus>();
+
+        ääni = GetComponentInChildren<AudioSource>();
+        ääni.clip = laserÄäni;
+
     }
 
     // Update is called once per frame
@@ -51,14 +57,12 @@ public class RobotinAmpuminen : MonoBehaviour
     }
 
     void Ammu() {
-        //ääni.clip = Ampumisäänet[Random.Range(0, Ampumisäänet.Length)];
-        //ääni.Play();
-        Debug.Log("Ammutaan1");
+        //Debug.Log("Ammutaan1");
         LineRenderer tykki = tykit[0];
 
         Vector3 suunta = (player.position - tykki.transform.position).normalized;
         Ray säde = new Ray(tykki.transform.position, suunta);
-
+        ääni.Play();
         RaycastHit osuma;
         Vector3 päätePiste;
         if (Physics.Raycast(säde, out osuma, ampumisEtäisyys)) {
