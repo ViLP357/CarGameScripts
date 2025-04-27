@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Musiikinsoitto : MonoBehaviour
 {
     AudioSource ääni;
+    public Slider säädin;
+    public Slider volumeSäädin;
     public AudioClip[] taustamusiikit;
     // Start is called before the first frame update
     void Start()
@@ -15,8 +18,14 @@ public class Musiikinsoitto : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+
+    public void VaihdaKanavaa() {
+        ääni.clip = taustamusiikit[(int)säädin.value];
+        ääni.Play();
     }
+
+    public void SaadaVolume() {
+        ääni.volume = volumeSäädin.value;
+    }
+
 }

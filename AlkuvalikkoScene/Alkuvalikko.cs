@@ -3,16 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
+using System;
 
 public class Alkuvalikko : MonoBehaviour
 {
     public GameObject tasoValikko;
     public GameObject leaderboard;
+
+    public PlayableDirector playableDirector;
+    public GameObject sarjakuva;
+
+    public float alkuaika;
     //private LevelManager levelscript;
     void Start()
     {
+
         tasoValikko.SetActive(false);
         leaderboard.SetActive(false);
+
+        sarjakuva.SetActive(false);
+        
+        alkuaika = Time.time;
+        Play();
+
         //PlayerPrefs.DeleteKey("BestTimeLevel1");
         //PlayerPrefs.DeleteKey("BestTimeLevel2");
         //PlayerPrefs.DeleteKey("BestTimeLevel3");
@@ -21,6 +35,23 @@ public class Alkuvalikko : MonoBehaviour
         //{
         //    Debug.LogError("LevelManager-objektia ei löytynyt scenestä!");
         //}
+    }
+    void Update()
+    {
+        
+        //Debug.Log(Time.time);
+        //Debug.Log(alkuaika);
+        //Debug.Log(Time.time - alkuaika);
+        //Debug.Log(Time.time - alkuaika > 5f);
+        if (Time.time - alkuaika > 48.5f) {
+            //Debug.Log("Suljetaan");
+            sarjakuva.SetActive(false);
+        }  
+    }
+
+    public void Play() {
+        sarjakuva.SetActive(true);
+        playableDirector.Play();
     }
     public void Lopeta() {
         Application.Quit();
