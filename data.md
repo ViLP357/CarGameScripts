@@ -1,7 +1,7 @@
 ```mermaid
 sequenceDiagram
  participant game
- paricipant server
+ participant server
  participant arduino
 
  game->>server: GET https://api/scores
