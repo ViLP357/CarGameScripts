@@ -6,14 +6,22 @@ sequenceDiagram
 
  game->>server: GET https://api/scores
  activate server
- server-->> game: Json-Data: {"scores": [{"username": "Testipelaaja​","time": 197,"date": "Sun Mar 30 2025 13:19:08 GMT+0000 (Coordinated Universal Time)","id": "67e944cc504f...}]}
+ server-->> game: Status: 200 OK, Json-Data: {"scores": [{"username": "Testipelaaja​","time": 197...}]}
  deactivate server
- Note right of browser: Rajapinta palauttaa pistetiedot
+ Note right of game: Rajapinta palauttaa pistetiedot
+
+ game->>server: POST https://api/scores, Json-Data: {"username": "Testipelaaja​","time": 197}
+ Note right of game: Lähetetään palvelimelle uusi tulos
+ activate server
+ server-->> game: Status: 200 OK,  Json-Data: {"username": "Testipelaaja​","time": 197, "date": Mon May..}
+ deactivate server
+ Note right of game: Rajapinta palauttaa pistetiedot
 
  arduino->>server: GET https://api/scores
  activate server
- server-->> arduino: Json-Data: {"scores": [{"username": "OonTosi Pro​","time": 197,"date": "Sun Mar 30 2025 13:19:08 GMT+0000 (Coordinated Universal Time)","id": "67e944cc504f...}]}
+ server-->> arduino: Status: 200 OK, Json-Data: {"scores": [{"username": "Testipelaaja​","time": 197...}]}
  deactivate server
+ Note left of arduino: Arduino näyttää näytöllä parhaan tuloksen
 
   
 ```
