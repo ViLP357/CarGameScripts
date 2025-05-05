@@ -4,11 +4,11 @@
   init: {
     'theme': 'base',
     'themeVariables': {
-      'primaryColor': '#BB2528',
+      'primaryColor': '#5ebf90',
       'primaryTextColor': '#fff',
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'secondaryColor': '#006100',
+      'primaryBorderColor': '#007c70',
+      'lineColor': '#29b6f8',
+      'secondaryColor': '#a3c2a3',
       'tertiaryColor': '#fff'
     }
   }
