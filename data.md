@@ -1,4 +1,10 @@
 ```mermaid
+
+mermaid.initialize({
+  securityLevel: 'loose',
+  theme: 'forest',
+});
+
 sequenceDiagram
  participant game
  participant server
@@ -15,7 +21,7 @@ sequenceDiagram
  activate server
  server-->> game: Status: 200 OK,  Json-Data: {"username": "Testipelaaja​","time": 197, "date": Mon May..}
  deactivate server
- Note right of game: Rajapinta palauttaa pistetiedot
+ Note right of game: Status: 200 OK
 
  arduino->>server: GET https://api/scores
  activate server
