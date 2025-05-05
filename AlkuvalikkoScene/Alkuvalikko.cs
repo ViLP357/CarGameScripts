@@ -11,21 +11,31 @@ public class Alkuvalikko : MonoBehaviour
     public GameObject tasoValikko;
     public GameObject leaderboard;
 
+    public GameObject infoLaatikko;
+
     public PlayableDirector playableDirector;
     public GameObject sarjakuva;
 
     public float alkuaika;
+    public static bool initDone = false;
     //private LevelManager levelscript;
     void Start()
     {
 
         tasoValikko.SetActive(false);
         leaderboard.SetActive(false);
+        infoLaatikko.SetActive(false);
 
         sarjakuva.SetActive(false);
         
-        alkuaika = Time.time;
-        Play();
+        
+        if (initDone == true) {
+        //    //initDone = true;
+        //    //Play();
+        //} else {
+            AvaaTasoValikko();
+        //    //tasoValikko.SetActive(true);
+        }
 
         //PlayerPrefs.DeleteKey("BestTimeLevel1");
         //PlayerPrefs.DeleteKey("BestTimeLevel2");
@@ -57,10 +67,22 @@ public class Alkuvalikko : MonoBehaviour
         Application.Quit();
     }
     public void AvaaTasoValikko() {
+        if (initDone == false) {
+            alkuaika = Time.time;
+            initDone = true;
+            Play();
+        } else {
+            tasoValikko.SetActive(true);
+        }
+        //Play();
         tasoValikko.SetActive(true);
     }
     public void SuljeTasoValikko(){
         tasoValikko.SetActive(false);
+    }
+
+    public void InfoLaatikkoNakyvyys() {
+        infoLaatikko.SetActive(!infoLaatikko.activeInHierarchy);
     }
 
     public void LeaderboardinNakyyys() {
@@ -79,5 +101,9 @@ public class Alkuvalikko : MonoBehaviour
         PlayerPrefs.SetInt("currentLevel", 3);
         Debug.Log(PlayerPrefs.GetInt("currentLevel"));
         SceneManager.LoadScene("AjoScene");
+    }
+
+    public void SkipTarina() {
+        sarjakuva.SetActive(false);
     }
 }

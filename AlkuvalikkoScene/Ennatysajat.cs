@@ -11,6 +11,7 @@ public class Ennatysajat : MonoBehaviour
     [SerializeField] public float Yhteisaika;
 
     public TMP_Text textYhteisaika;
+    public TMP_Text textYhteisaika2;
     public static Ennatysajat instanssi;
 
     // Start is called before the first frame update
@@ -46,6 +47,7 @@ public class Ennatysajat : MonoBehaviour
         }
         //textYhteisaika.text = Yhteisaika.ToString() + " " + muunnaTekstiksi((int)Yhteisaika);
         textYhteisaika.text = muunnaTekstiksi((int)Yhteisaika);
+        textYhteisaika2.text = muunnaTekstiksi((int)Yhteisaika);
     }
     private string muunnaTekstiksi(int aika) {
         int tunnit = aika / 3600;

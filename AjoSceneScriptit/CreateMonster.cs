@@ -22,7 +22,7 @@ public class CreateMonster : MonoBehaviour
             Transform kohta = syntypaikat[i];
 
             Instantiate(monster, kohta.position, monster.transform.rotation);
-            Debug.Log(kohta.position);
+            //Debug.Log(kohta.position);
         }
     }
 }
