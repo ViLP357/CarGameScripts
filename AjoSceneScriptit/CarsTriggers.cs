@@ -58,7 +58,7 @@ public class CarsTriggers : MonoBehaviour
         if (collision.transform.tag == "seina") {
             voima = collision.relativeVelocity.magnitude;
             if (Time.time - lastCrash > 0.5f) {  
-                Debug.Log(voima);
+                //Debug.Log(voima);
                 if (voima > 4) {
                     //Debug.Log("Luja törmäys");
                     AutonKunto.instanssi.crashHit(Mathf.Round(voima) * 4);
@@ -67,12 +67,12 @@ public class CarsTriggers : MonoBehaviour
             }            
         }
         else if (collision.transform.tag == "robo") {
-            Debug.Log("auto osuu");
+            //Debug.Log("auto osuu");
             voima = collision.relativeVelocity.magnitude;
             if (Time.time - lastCrash > 0.5f) {
                 if (voima > 3) {
                         VihollisenOhjaus[] viholliset = GameObject.FindObjectsOfType<VihollisenOhjaus>();
-                        Debug.Log("Robo kuolee");
+                        //Debug.Log("Robo kuolee");
                         foreach (VihollisenOhjaus vihollinen in viholliset) {
                             if (vihollinen.gameObject == collision.gameObject) {
                                 vihollinen.Kuole();

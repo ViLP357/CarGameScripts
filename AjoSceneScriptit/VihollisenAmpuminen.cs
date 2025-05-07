@@ -35,7 +35,7 @@ public class RobotinAmpuminen : MonoBehaviour
         //nappi = GameObject.FindObjectOfType<Napinpainallus>();
 
         ääni = GetComponentInChildren<AudioSource>();
-        ääni.clip = laserÄäni;
+        //ääni.clip = laserÄäni;
 
     }
 
@@ -58,6 +58,7 @@ public class RobotinAmpuminen : MonoBehaviour
 
     void Ammu() {
         //Debug.Log("Ammutaan1");
+        ääni.clip = laserÄäni;
         LineRenderer tykki = tykit[0];
 
         Vector3 suunta = (player.position - tykki.transform.position).normalized;

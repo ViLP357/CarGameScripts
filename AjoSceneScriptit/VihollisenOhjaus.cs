@@ -22,13 +22,17 @@ public class VihollisenOhjaus : MonoBehaviour
     Animator animaattori;
     public VihollisenOhjaus instanssi;
 
-    
+    AudioSource ääni;
+    public AudioClip kavelyÄäni;
+
+    float edellinen = 0f;
     private void Awake() {
         player = GameObject.Find("CarPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
         animaattori = GetComponentInChildren<Animator>();
         animaattori.SetBool("seisoo", true);
         instanssi = this;
+        ääni = GetComponentInChildren<AudioSource>();
     }
 
     private void Update() {
@@ -89,6 +93,11 @@ public class VihollisenOhjaus : MonoBehaviour
     }
     private void ChasePlayer() {
         //Debug.Log("jahdataan");
+        //ääni.clip = kavelyÄäni;
+        if (Time.time - edellinen >= 2.2f) {
+            ääni.PlayOneShot(kavelyÄäni, 5f);
+            edellinen = Time.time;
+        }
         agent.isStopped = false;
         agent.SetDestination(player.position);
         animaattori.SetBool("tahtaa", false);

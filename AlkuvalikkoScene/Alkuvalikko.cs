@@ -12,6 +12,7 @@ public class Alkuvalikko : MonoBehaviour
     public GameObject leaderboard;
 
     public GameObject infoLaatikko;
+    public GameObject ohjeLaatikko;
 
     public PlayableDirector playableDirector;
     public GameObject sarjakuva;
@@ -25,6 +26,7 @@ public class Alkuvalikko : MonoBehaviour
         tasoValikko.SetActive(false);
         leaderboard.SetActive(false);
         infoLaatikko.SetActive(false);
+        ohjeLaatikko.SetActive(false);
 
         sarjakuva.SetActive(false);
         
@@ -83,6 +85,9 @@ public class Alkuvalikko : MonoBehaviour
 
     public void InfoLaatikkoNakyvyys() {
         infoLaatikko.SetActive(!infoLaatikko.activeInHierarchy);
+    }
+    public void OhjeLaatikkoNakyvyys() {
+        ohjeLaatikko.SetActive(!ohjeLaatikko.activeInHierarchy);
     }
 
     public void LeaderboardinNakyyys() {
