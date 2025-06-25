@@ -17,7 +17,7 @@ public class Level1Manager : MonoBehaviour
         //Instantiate(car, lahtopaikka.position, lahtopaikka.rotation);
     }
     public void presettings() {
-        Debug.Log("Presettings toimii");
+        //Debug.Log("Presettings toimii");
         placeCar();
         levelinPortit.SetActive(true);
         levelinTehtavaTeksti.SetActive(true);

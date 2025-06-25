@@ -38,7 +38,7 @@ public class AutonKunto : MonoBehaviour
             conditionLevel -= hit;
         }
         else {
-            Debug.Log("Health loppu");
+            //Debug.Log("Health loppu");
             conditionLevel = 0;
             ValikkoManager.instanssi.AvaaKuolemaValikko();
         }

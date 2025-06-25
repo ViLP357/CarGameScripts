@@ -13,7 +13,7 @@ public class Level2Manager : MonoBehaviour
         car.transform.rotation = lahtopaikka.rotation;
     }
     public void presettings() {
-        Debug.Log("Level 2 käynnissä");
+        //Debug.Log("Level 2 käynnissä");
         placeCar();
         levelinPortit.SetActive(true);
         levelinTehtavaTeksti.SetActive(true);
